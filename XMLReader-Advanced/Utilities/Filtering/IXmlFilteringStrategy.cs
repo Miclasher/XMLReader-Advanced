@@ -6,5 +6,5 @@ namespace XMLReader_Advanced.Utilities.Filtering;
 
 public interface IXmlFilteringStrategy
 {
-    List<ScientificWork> Filter(ScientificWork searchParams, XmlDocument document);
+    List<ScientificWork> Filter(ScientificWork searchParams, string xmlFilePath);
 }
