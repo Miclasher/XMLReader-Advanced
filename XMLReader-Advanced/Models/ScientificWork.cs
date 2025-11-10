@@ -14,7 +14,7 @@ public sealed class ScientificWork
     public ScientificWork() { }
 
 
-    //Constructor for LINQ filtering strategy
+    //Constructor for filtering strategies
     public ScientificWork(string title, string faculty, string department, string field, string lab)
     {
         WorkTitle = title;
