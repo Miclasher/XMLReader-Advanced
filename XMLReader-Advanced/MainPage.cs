@@ -205,14 +205,14 @@ public partial class MainPage : Form
 
         foreach (var work in _lastSearchResult)
         {
-            ResultRichTextBox.Text += $@"Назва роботи: {work.WorkTitle}\n";
-            ResultRichTextBox.Text += $@"Факультет: {work.Faculty}\n";
-            ResultRichTextBox.Text += $@"Кафедра: {work.Department}\n";
-            ResultRichTextBox.Text += $@"Галузь: {work.Field}\n";
-            ResultRichTextBox.Text += $@"Лабораторія: {work.Lab}\n";
-            ResultRichTextBox.Text += $@"Автор: {work.AuthorFullName} ({work.AuthorPosition})\n";
-            ResultRichTextBox.Text += $@"Замовник: {work.ClientName}\n";
-            ResultRichTextBox.Text += @"__________________________________\n\n";
+            ResultRichTextBox.Text += $"Назва роботи: {work.WorkTitle}\n";
+            ResultRichTextBox.Text += $"Факультет: {work.Faculty}\n";
+            ResultRichTextBox.Text += $"Кафедра: {work.Department}\n";
+            ResultRichTextBox.Text += $"Галузь: {work.Field}\n";
+            ResultRichTextBox.Text += $"Лабораторія: {work.Lab}\n";
+            ResultRichTextBox.Text += $"Автор: {work.AuthorFullName} ({work.AuthorPosition})\n";
+            ResultRichTextBox.Text += $"Замовник: {work.ClientName}\n";
+            ResultRichTextBox.Text += "__________________________________\n\n";
         }
     }
 
