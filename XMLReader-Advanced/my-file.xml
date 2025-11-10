@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScientificWorks>
+	<Work WorkTitle="Дослідження квантових ефектів"
+	      Faculty="Фізичний"
+	      Department="Кафедра теоретичної фізики"
+	      Field="Фізика">
+		<Authors>
+			<Author FullName="Петренко П.І."
+			        Position="Професор"
+			        PositionStartDate="2010-09-01"
+			        PositionEndDate="2025-06-30"/>
+			<Author FullName="Іваненко А.В."
+			        Position="Аспірант"
+			        PositionStartDate="2022-10-01"
+			        PositionEndDate="2026-09-30"/>
+		</Authors>
+		<Lab>Лабораторія №1</Lab>
+		<Client Name="НАН України"
+		        Address="м. Київ, вул. Володимирська, 54"
+		        Subordination="Державна"/>
+	</Work>
+	<Work WorkTitle="Розробка нової моделі ШІ"
+	      Faculty="ФІОТ"
+	      Department="Кафедра штучного інтелекту"
+	      Field="ІТ">
+		<Authors>
+			<Author FullName="Сидоренко В.В."
+			        Position="Доцент"
+			        PositionStartDate="2015-09-01"
+			        PositionEndDate="2027-06-30"/>
+		</Authors>
+		<Lab>Лабораторія кібернетики</Lab>
+	</Work>
+	<Work WorkTitle="Аналіз геному"
+	      Faculty="Біологічний"
+	      Department="Кафедра генетики"
+	      Field="Біологія">
+		<Authors>
+			<Author FullName="Михайленко О.С."
+			        Position="Старший науковий співробітник"
+			        PositionStartDate="2012-01-15"
+			        PositionEndDate="2028-01-14"/>
+		</Authors>
+		<Client Name="Інститут біології"
+		        Address="м. Київ, вул. Потоцького, 1"
+		        Subordination="Комерційна"/>
+	</Work>
+</ScientificWorks>

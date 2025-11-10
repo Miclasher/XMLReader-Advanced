@@ -1,15 +1,14 @@
-namespace XMLReader_Advanced
+namespace XMLReader_Advanced;
+
+internal static class Program
 {
-    internal static class Program
+    /// <summary>
+    ///  The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    public static void Main()
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        public static void Main()
-        {
-            ApplicationConfiguration.Initialize();
-            Application.Run(new MainPage());
-        }
+        ApplicationConfiguration.Initialize();
+        Application.Run(new MainPage());
     }
 }
