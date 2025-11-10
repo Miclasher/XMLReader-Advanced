@@ -4,7 +4,7 @@ using XMLReader_Advanced.Models;
 
 namespace XMLReader_Advanced.Utilities.Filtering;
 
-public class LinqFilteringStrategy : IXmlFilteringStrategy
+public sealed class LinqFilteringStrategy : IXmlFilteringStrategy
 {
     public List<ScientificWork> Filter(ScientificWork searchParams, string xmlFilePath)
     {

@@ -2,7 +2,7 @@
 
 namespace XMLReader_Advanced.Utilities.Saving;
 
-public class HtmlSaver : IFileSaver
+public sealed class HtmlSaver : IFileSaver
 {
     public void Save(List<ScientificWork> works, string fileName)
     {

@@ -1,10 +1,9 @@
-﻿namespace XMLReader_Advanced
+﻿namespace XMLReader_Advanced;
+
+public partial class MainPage : Form
 {
-    public partial class MainPage : Form
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

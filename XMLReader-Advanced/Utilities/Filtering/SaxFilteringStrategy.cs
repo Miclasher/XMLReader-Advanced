@@ -3,7 +3,7 @@ using XMLReader_Advanced.Models;
 
 namespace XMLReader_Advanced.Utilities.Filtering;
 
-public class SaxFilteringStrategy : IXmlFilteringStrategy
+public sealed class SaxFilteringStrategy : IXmlFilteringStrategy
 {
     public List<ScientificWork> Filter(ScientificWork searchParams, string xmlFilePath)
     {
