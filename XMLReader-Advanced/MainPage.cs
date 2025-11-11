@@ -11,8 +11,8 @@ public partial class MainPage : Form
 {
     private readonly GoogleDriveService _driveService;
     private List<ScientificWork> _lastSearchResult;
-    private const string LocalXmlPath = @"C:\Users\Miclasher\source\repos\Miclasher\XMLReader-Advanced\XMLReader-Advanced\ScientificWorks.xml";
-    private const string LocalXslPath = @"C:\Users\Miclasher\source\repos\Miclasher\XMLReader-Advanced\XMLReader-Advanced\ScientificWorks.xls";
+    private const string LocalXmlPath = @"ScientificWorks.xml";
+    private const string LocalXslPath = @"ScientificWorks.xls";
     private readonly Logger _logger = Logger.Instance;
 
     public MainPage()
