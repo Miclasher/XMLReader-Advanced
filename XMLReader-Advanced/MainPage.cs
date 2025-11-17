@@ -1,6 +1,5 @@
 ﻿using System.Xml;
 using System.Xml.Xsl;
-using Google.Apis.Drive.v3;
 using XMLReader_Advanced.Models;
 using XMLReader_Advanced.Utilities;
 using XMLReader_Advanced.Utilities.Filtering;
@@ -125,7 +124,7 @@ public partial class MainPage : Form
                 textValue = element.InnerText;
             }
         }
-        
+
         if (!string.IsNullOrEmpty(textValue))
         {
             var trimmedValue = textValue.Trim();

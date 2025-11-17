@@ -1,5 +1,4 @@
-﻿using Google.Apis.Drive.v3;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using XMLReader_Advanced.Models;
 
 namespace XMLReader_Advanced.Utilities.Saving;
@@ -27,10 +26,14 @@ public sealed class XmlSaver : IFileSaver
             );
 
             if (!string.IsNullOrEmpty(work.Lab))
+            {
                 workElement.Add(new XElement("Lab", work.Lab));
+            }
 
             if (!string.IsNullOrEmpty(work.ClientName))
+            {
                 workElement.Add(new XElement("Client", new XAttribute("Name", work.ClientName)));
+            }
 
             if (!string.IsNullOrEmpty(work.AuthorFullName))
             {
