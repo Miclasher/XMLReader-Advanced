@@ -18,7 +18,7 @@ public class XmlSaverFactory : SaverFactory
 
     public override IFileSaver CreateSaver()
     {
-        return new XmlSaver();
+        return new XmlSaver(DriveService);
     }
 }
 
@@ -28,6 +28,6 @@ public class HtmlSaverFactory : SaverFactory
 
     public override IFileSaver CreateSaver()
     {
-        return new HtmlSaver();
+        return new HtmlSaver(DriveService);
     }
 }

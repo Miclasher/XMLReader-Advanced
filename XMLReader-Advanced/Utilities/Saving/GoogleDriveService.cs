@@ -1,16 +1,57 @@
 ﻿using System.Text;
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 
 namespace XMLReader_Advanced.Utilities.Saving;
 
 public sealed class GoogleDriveService
 {
-    private readonly DriveService _service;
+    private DriveService _service;
     private readonly string _folderId;
 
-    public GoogleDriveService()
+    private static readonly string[] _scopes = { DriveService.Scope.DriveFile };
+    private static readonly string _applicationName = "XMLConverterLab";
+
+    public GoogleDriveService(string credentialsPath, string folderId)
     {
-        throw new NotImplementedException("Authentification not implemented yet.");
+        _folderId = folderId;
+        InitializeService(credentialsPath);
+    }
+
+    private void InitializeService(string credentialsPath)
+    {
+        try
+        {
+            UserCredential userCredential;
+
+            if (!File.Exists(credentialsPath))
+            {
+                throw new FileNotFoundException(
+                    "Файл credentials.json не знайдено. Помістіть його у папку з  програмою.");
+            }
+
+            using var fs = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read);
+            var credFolderPath = "token.json";
+
+            userCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                GoogleClientSecrets.FromStream(fs).Secrets,
+                _scopes,
+                "user",
+                CancellationToken.None,
+                new FileDataStore(credFolderPath, true)).Result;
+
+            _service = new(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = userCredential,
+                ApplicationName = _applicationName
+            });
+        }
+        catch (Exception e)
+        {
+            Logger.Instance.Log(Logger.LoggingLevel.Error, e.Message);
+        }
     }
 
 

@@ -23,7 +23,6 @@ public class Logger
     public void Log(LoggingLevel level, string message)
     {
         var logEntry = $"{DateTime.Now:dd.MM.yyyy HH:mm:ss} {level}. {message}";
-        Console.WriteLine(logEntry);
 
         lock (_fileLock)
         {
