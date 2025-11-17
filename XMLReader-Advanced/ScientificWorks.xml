@@ -3,7 +3,8 @@
 	<Work WorkTitle="Дослідження квантових ефектів"
 	      Faculty="Фізичний"
 	      Department="Кафедра теоретичної фізики"
-	      Field="Фізика">
+	      Field="Фізика"
+		  Priority="Високий">
 		<Authors>
 			<Author FullName="Петренко П.І."
 			        Position="Професор"
@@ -22,7 +23,8 @@
 	<Work WorkTitle="Розробка нової моделі ШІ"
 	      Faculty="ФІОТ"
 	      Department="Кафедра штучного інтелекту"
-	      Field="ІТ">
+	      Field="ІТ"
+		  GrantID="52f76a44-540f-4dcb-a051-c312c3643929">
 		<Authors>
 			<Author FullName="Сидоренко В.В."
 			        Position="Доцент"

@@ -155,7 +155,7 @@ public partial class MainPage : Form
             return;
         }
 
-        // Логування
+        // Logging
         if (string.IsNullOrEmpty(logParams))
         {
             logParams = "немає параметрів";
@@ -163,7 +163,7 @@ public partial class MainPage : Form
 
         _logger.Log(Logger.LoggingLevel.Filtering, $"Пошук. Параметри: {logParams.TrimEnd(' ', ',')}");
 
-        // Вибір стратегії
+        // Selecting strategy
         IXmlFilteringStrategy parserStrategy;
         if (XMLDOMRadioButton.Checked)
         {
