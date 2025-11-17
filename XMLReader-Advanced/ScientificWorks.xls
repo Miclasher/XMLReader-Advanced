@@ -20,8 +20,6 @@
 							<td><xsl:value-of select="@Faculty"/></td>
 							<td><xsl:value-of select="@Department"/></td>
 							<td><xsl:value-of select="@Field"/></td>
-							<td><xsk:vakue-of select-="@GrantId"/></td>
-							<td><xsk:vakue-of select-="@Priority"/></td>
 							<td><xsl:value-of select="Lab"/></td>
 							<td>
 								<xsl:for-each select="Authors/Author">

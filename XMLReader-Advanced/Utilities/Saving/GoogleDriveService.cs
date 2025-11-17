@@ -11,8 +11,8 @@ public sealed class GoogleDriveService
     private DriveService _service;
     private readonly string _folderId;
 
-    private static readonly string[] _scopes = { DriveService.Scope.DriveFile };
-    private static readonly string _applicationName = "XMLConverterLab";
+    private static readonly string[] Scopes = { DriveService.Scope.Drive };
+    private static readonly string ApplicationName = "XMLConverterLab";
 
     public GoogleDriveService(string credentialsPath, string folderId)
     {
@@ -20,12 +20,38 @@ public sealed class GoogleDriveService
         InitializeService(credentialsPath);
     }
 
+    public string GetFileIdByName(string fileName, string folderId = null!)
+    {
+        var request = _service.Files.List();
+
+        var query = $"name = '{fileName}' and trashed = false";
+
+        if (!string.IsNullOrEmpty(folderId))
+        {
+            query += $" and '{folderId}' in parents";
+        }
+
+        request.Q = query;
+        request.Fields = "files(id)";
+        request.PageSize = 1;
+
+        try
+        {
+            var result = request.Execute();
+            var file = result.Files.FirstOrDefault();
+            return file?.Id;
+        }
+        catch (Exception ex)
+        {
+            Logger.Instance.Log(Logger.LoggingLevel.Error, $"Помилка пошуку файлу '{fileName}': {ex.Message}");
+            return null;
+        }
+    }
+
     private void InitializeService(string credentialsPath)
     {
         try
         {
-            UserCredential userCredential;
-
             if (!File.Exists(credentialsPath))
             {
                 throw new FileNotFoundException(
@@ -35,9 +61,9 @@ public sealed class GoogleDriveService
             using var fs = new FileStream(credentialsPath, FileMode.Open, FileAccess.Read);
             var credFolderPath = "token.json";
 
-            userCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+            var userCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 GoogleClientSecrets.FromStream(fs).Secrets,
-                _scopes,
+                Scopes,
                 "user",
                 CancellationToken.None,
                 new FileDataStore(credFolderPath, true)).Result;
@@ -45,7 +71,7 @@ public sealed class GoogleDriveService
             _service = new(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = userCredential,
-                ApplicationName = _applicationName
+                ApplicationName = ApplicationName
             });
         }
         catch (Exception e)

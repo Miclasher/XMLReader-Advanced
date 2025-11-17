@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using System.Xml.Xsl;
+using Google.Apis.Drive.v3;
 using XMLReader_Advanced.Models;
 using XMLReader_Advanced.Utilities;
 using XMLReader_Advanced.Utilities.Filtering;
@@ -13,17 +14,42 @@ public partial class MainPage : Form
     private List<ScientificWork> _lastSearchResult;
     private const string LocalXmlPath = @"ScientificWorks.xml";
     private const string LocalXslPath = @"ScientificWorks.xls";
+    private const string LocalCredentialsPath = @"Credentials.json";
+    private const string FolderId = @"1xeum1tHICbx3AgS3EC41vFep4U90kMCw";
     private readonly Logger _logger = Logger.Instance;
 
     public MainPage()
     {
         InitializeComponent();
-        _lastSearchResult = new List<ScientificWork>();
+        _lastSearchResult = [];
 
         try
         {
-            _driveService = new GoogleDriveService();
-            // TODO : implement gdrive auth and loading xml
+            _driveService = new GoogleDriveService(LocalCredentialsPath, FolderId);
+            var remoteXmlFileId = _driveService.GetFileIdByName(LocalXmlPath, FolderId);
+            var remoteXlsFileId = _driveService.GetFileIdByName(LocalXslPath, FolderId);
+
+            if (!string.IsNullOrEmpty(remoteXmlFileId))
+            {
+                var xmlContent = _driveService.DownloadFile(remoteXmlFileId);
+                File.WriteAllText(LocalXmlPath, xmlContent);
+                Logger.Instance.Log(Logger.LoggingLevel.Saving, $"Файл {LocalXmlPath} оновлено з Google Drive (Folder: {FolderId}).");
+            }
+            else
+            {
+                Logger.Instance.Log(Logger.LoggingLevel.Error, "Файл 'ScientificWorks.xml' не знайдено у вказаній папці на Google Drive.");
+            }
+
+            if (!string.IsNullOrEmpty(remoteXlsFileId))
+            {
+                var xlsContent = _driveService.DownloadFile(remoteXlsFileId);
+                File.WriteAllText(LocalXslPath, xlsContent);
+                Logger.Instance.Log(Logger.LoggingLevel.Saving, $"Файл {LocalXslPath} оновлено з Google Drive (Folder: {FolderId}).");
+            }
+            else
+            {
+                Logger.Instance.Log(Logger.LoggingLevel.Error, "Файл 'ScientificWorks.xls' не знайдено у вказаній папці на Google Drive.");
+            }
         }
         catch (Exception ex)
         {
@@ -35,7 +61,7 @@ public partial class MainPage : Form
 
     private void Form_Load(object sender, EventArgs e)
     {
-        if (System.IO.File.Exists(LocalXmlPath))
+        if (File.Exists(LocalXmlPath))
         {
             FillDropdowns();
         }
@@ -81,14 +107,31 @@ public partial class MainPage : Form
 
     private void CheckPropertyKey(ComboBox comboBox, XmlNode node, string property)
     {
-        var valueNode = property.StartsWith("@") ? node.Attributes!.GetNamedItem(property[1..]) : node.SelectSingleNode(property);
+        string textValue = null;
 
-        if (valueNode != null && !string.IsNullOrEmpty(valueNode.Value))
+        if (property.StartsWith("@"))
         {
-            var value = valueNode.Value.Trim();
-            if (!comboBox.Items.Contains(value))
+            var attr = node.Attributes?.GetNamedItem(property[1..]);
+            if (attr != null)
             {
-                comboBox.Items.Add(value);
+                textValue = attr.Value;
+            }
+        }
+        else
+        {
+            var element = node.SelectSingleNode(property);
+            if (element != null)
+            {
+                textValue = element.InnerText;
+            }
+        }
+        
+        if (!string.IsNullOrEmpty(textValue))
+        {
+            var trimmedValue = textValue.Trim();
+            if (!comboBox.Items.Contains(trimmedValue))
+            {
+                comboBox.Items.Add(trimmedValue);
             }
         }
     }

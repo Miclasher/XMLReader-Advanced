@@ -30,7 +30,8 @@ public sealed class LinqFilteringStrategy : IXmlFilteringStrategy
                               Field = (string)work.Attribute("Field")! ?? "",
                               Lab = (string)work.Element("Lab")! ?? "",
                               ClientName = (string)work.Element("Client")?.Attribute("Name")! ?? "",
-                              AuthorFullName = work.Element("Authors")!.Elements("Author").First().Attribute("FullName")!.Value
+                              AuthorFullName = work.Element("Authors")!.Elements("Author").First().Attribute("FullName")!.Value ?? "",
+                              AuthorPosition = work.Element("Authors")!.Elements("Author").First().Attribute("Position")!.Value ?? ""
                           };
 
 
